@@ -1,13 +1,9 @@
 import discord
 import constants
 
-
-
 class RPGClient(discord.Client):
-    
 
-
-    def __init__(self, prefix: str, intents: discord.Intents):
+    def __init__(self, intents: discord.Intents, prefix: str = '!'):
         super().__init__(intents=intents)
         self.prefix: str = prefix
 
@@ -20,7 +16,7 @@ class RPGClient(discord.Client):
             case _:
                 await message.channel.send("Unknown Command!")
 
-    async def on_ready(self: discord.Client):
+    async def on_ready(self):
         guilds = [guild.name async for guild in self.fetch_guilds()]
         print(f"Finished logon, serving {guilds}")
     
